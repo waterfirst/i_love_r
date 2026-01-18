@@ -4,6 +4,7 @@ library(dplyr)
 library(bslib)
 library(DBI)
 library(RSQLite)
+library(rlang)
 
 # Initialize SQLite database
 db_path <- "i_love_r.db"
@@ -127,7 +128,7 @@ server <- function(input, output, session) {
 
   # Data Visualization
   output$viz_plot <- renderPlot({
-    p <- ggplot(manufacturing_data, aes(x = .data[[input$x_var]], y = .data[[input$y_var]])) +
+    p <- ggplot(manufacturing_data, aes(x = !!sym(input$x_var), y = !!sym(input$y_var))) +
       geom_point() +
       theme_minimal() +
       labs(title = "Manufacturing Data Analysis")

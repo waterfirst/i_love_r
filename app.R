@@ -127,7 +127,7 @@ server <- function(input, output, session) {
 
   # Data Visualization
   output$viz_plot <- renderPlot({
-    p <- ggplot(manufacturing_data, aes_string(x = input$x_var, y = input$y_var)) +
+    p <- ggplot(manufacturing_data, aes(x = .data[[input$x_var]], y = .data[[input$y_var]])) +
       geom_point() +
       theme_minimal() +
       labs(title = "Manufacturing Data Analysis")
